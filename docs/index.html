@@ -3,8 +3,8 @@
   <head>
 	<meta name="generator" content="Hugo 0.74.3" />
     <meta charset="utf-8">
-<title>reveal-hugo</title>
-<meta name="description" content="A Hugo theme for creating Reveal.js presentations">
+<title>The Gravitee CICD Benchmark</title>
+<meta name="description" content="The Gravitee CICD Benchmark results, and and open perspective on future plans">
 <meta name="author" content="Josh Dzielak">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -57,42 +57,103 @@
       <div class="slides">
   
 
-    <section><h1 id="heading">📽️</h1>
-<h1 id="reveal-hugo">reveal-hugo</h1>
-<p>A Hugo theme for creating Reveal.js presentations.</p>
-<p>~ made by <a href="https://dzello.com/">@dzello</a> ~</p>
+    <h1 id="heading">📽️</h1>
+
+<section data-noprocess data-shortcode-slide
+      data-background-color="#FF4081"
+      data-background-image="/images/alex-litvin-790876-unsplash.jpg">
+  
+<h1 id="the-gravitee-cicd-benchmark"><a href="">The Gravitee CICD Benchmark</a></h1>
+<p>Made with Hugo theme for creating Reveal.js presentations.</p>
+<p>~ made by <a href="https://gravitee.io/">The Gravitee Team</a> ~</p>
 </section>
 
   
 
     <section><h2 id="whats-included">What&rsquo;s included?</h2>
 <ul>
-<li>All Reveal.js HTML, CSS and JS (v3.9.2)</li>
-<li>All out-of-the-box Reveal.js themes</li>
-<li>Two custom Reveal.js themes (including this one)</li>
+<li>First we will go through the results of the Benchmark</li>
+<li>Then I will talk about the <code>Secret Hub</code> Case, and discuss about Bots and Hybrid architecture in <code>Gravitee</code> CICD</li>
+<li>After that, I will show up and explain an AWS EKS pricing</li>
+<li>Finally, I will open up to what&rsquo;s next : planification, milestones, etc&hellip;</li>
 </ul>
 <br>
 <br>
-<p><a href="https://github.com/dzello/reveal-hugo">see the code on github</a></p>
+<p><a href="https://github.com/gravitee-lab/cci-pipeline-operator">see the code on github</a></p>
 </section><section>
-<h2 id="features">Features</h2>
+<h2 id="benchmark-results">Benchmark Results</h2>
 <ul>
-<li>Write slides in Markdown in one or more files</li>
-<li>Shortcodes for fragments, sections, slides &amp; more</li>
-<li>All Reveal.js parameters can be customized</li>
-<li>Any Hugo section can be output as a presentation</li>
-<li>Supports offline development or using a CDN</li>
+<li>As of the Results of the Benchmark  :
+<ul>
+<li>I will explain how to read <a href="https://docs.google.com/spreadsheets/d/1cbmqrWuPd9IkOz3fweozo4EHKunsBTHaxgeA8fDhxrI/edit#gid=0">the benchmark matrix</a>, and the overall results</li>
+<li>I will explain a case I did about <code>Circle CI</code> and one <code>Gravitee</code> Component (The APIM Gateway) : <a href="https://github.com/gravitee-lab/gravitee-gateway">https://github.com/gravitee-lab/gravitee-gateway</a> and one <a href="https://app.circleci.com/pipelines/github/gravitee-lab/gravitee-gateway/37/workflows/b6c84de7-986c-4668-8f64-86936af20f47">successful execution</a></li>
+<li>I will then propose to take questions about the pricing of each provider that passed the benchmark, at the very end of the presentation : because we have other things to discuss before.</li>
+</ul>
+</li>
 </ul>
 </section>
-    <section><h1 id="usage">Usage</h1>
+    <section><h1 id="the-secret-hub-case">The Secret Hub Case</h1>
 </section><section>
-<h2 id="prerequisite">Prerequisite</h2>
-<p>First, add this to your <code>config.toml</code>:</p>
-<pre><code class="language-toml">[outputFormats.Reveal]
-baseName = &quot;index&quot;
-mediaType = &quot;text/html&quot;
-isHTML = true
+<h2 id="what-is-secret-hub-">What is Secret Hub ?</h2>
+<p>Have you ever heard about <a href="https://secrethub.io">https://secrethub.io</a> ? Let&rsquo;s play together</p>
+<ul>
+<li>On your everuday dev machine, Install <code>Secret Hub CLI</code> <a href="https://secrethub.io/docs/start/getting-started/#install">following the official doc instructions</a></li>
+<li>And then execute :</li>
+</ul>
+<pre><code class="language-bash">secrethub signup
 </code></pre>
+</section><section>
+<h1 id="what-just-happened-">What just happened ?</h1>
+<ul>
+<li>you created a SecretHub user account using the <code>Secret Hub</code> REST API</li>
+<li>the <code>Secret Hub</code> REST API came out of the std output is the <strong>ROOT TOKEN</strong> for your new Secret Hub account (user) :
+<ul>
+<li>using this ROOT Token gives full permissions : SO we never ever give anyone that TOKEN</li>
+<li>we give tokens with only read permissions to pipeline service providers (Cirle Ci, Travis CI,  Gitlab CI)</li>
+</ul>
+</li>
+<li>A new file was created on your filesystem, <code>~/.secrethub/credential</code>, and inside of it, you will find the  <strong>ROOT TOKEN</strong> for your new Secret Hub account persisted.</li>
+</ul>
+</section><section>
+<h2 id="create-a-secret-hub-repo">Create a <code>Secret Hub</code> repo</h2>
+<p>Have you ever heard about <a href="https://secrethub.io">https://secrethub.io</a> ? Let&rsquo;s play together</p>
+<ul>
+<li>On your everuday dev machine, Install <code>Secret Hub CLI</code> <a href="https://secrethub.io/docs/start/getting-started/#install">following the official doc instructions</a></li>
+<li>And then execute :</li>
+</ul>
+<pre><code class="language-bash"># secrethub repo init [options] &lt;namespace&gt;/&lt;repo&gt;
+secrethub repo init gravitee-lab/apim-gateway
+secrethub account inspect
+secrethub account inspect | jq .
+</code></pre>
+</section><section>
+<h2 id="write-secrets-to-secret-hub">Write Secrets to <code>Secret Hub</code></h2>
+<p>Have you ever heard about <a href="https://secrethub.io">https://secrethub.io</a> ? Let&rsquo;s play together</p>
+<ul>
+<li>And then execute :</li>
+</ul>
+<pre><code class="language-bash">secrethub mkdir --parents gravitee-lab/apim-gateway/staging/docker/quay/
+
+# write a secret
+secrethub write gravitee-lab/apim-gateway/staging/docker/quay/botuser
+secrethub write gravitee-lab/apim-gateway/staging/docker/quay/botoken
+# read a secret a secret
+secrethub read gravitee-lab/apim-gateway/staging/docker/quay/botuser
+secrethub read gravitee-lab/apim-gateway/staging/docker/quay/botoken
+
+</code></pre>
+<p>see also The Circle CI example I prepared :</p>
+<ul>
+<li><a href="https://github.com/gravitee-lab/gravitee-gateway/blob/8d13fe050ebf99f74f470ad71620f3bc78cf6d70/.circleci/config.yml#L101">the Circle CI pipeline config</a></li>
+<li><a href="https://app.circleci.com/pipelines/github/gravitee-lab/gravitee-gateway/37/workflows/b6c84de7-986c-4668-8f64-86936af20f47/jobs/58">the Circle CI pipeline execution successfull docker push</a></li>
+</ul>
+</section><section>
+<h2 id="secret-hub-and-secret-management-in-gravitee-s-cicd">Secret Hub and Secret Management (in Gravitee &rsquo;s CICD)</h2>
+<ul>
+<li>about Secret management : keypass2, secrethub, and hashcorp vault, what architecture for secret management in the Gravitee CICD Global system ?</li>
+<li>All the services already in use in the CI CD Scope : Let&rsquo;s and talk about the Hybrid Cloud nature of the CICD, and CICD Hybrid cloud management.</li>
+<li>CICD Hybrid cloud management and Bots : <a href="https://gravitee-lab-cicd-bot.github.io/post/the-gravitee-lab-ci-cd-bot/">why we need bots</a>, <a href="https://gravitee-lab-cicd-bot.github.io/">what are bots</a>,</li>
+</ul>
 </section><section>
 <h3 id="presentation-at-site-root">Presentation at site root</h3>
 <p>Create <code>content/_index.md</code>:</p>
@@ -495,6 +556,7 @@ background = &quot;#FF4081&quot;
 <section data-noprocess data-shortcode-slide
     data-background="#FF4081"
     class="hotpink"
+    data-color="#000000"
     data-template="hotpink">
 <p>Apply the template using the <strong>template</strong> attribute of the slide shortcode:</p>
 <pre><code class="language-markdown">{{&lt; slide template=&quot;hotpink&quot; &gt;}}
@@ -686,8 +748,8 @@ Reveal.js markdown uses HTML comments to change slide properties, like backgroun
 </section><section>
 <h2 id="code-and-docs">Code and docs</h2>
 <ul>
-<li><a href="https://github.com/dzello/reveal-hugo">reveal-hugo Github README</a></li>
-<li><a href="https://github.com/dzello/reveal-hugo/tree/master/exampleSite">Content for this presentation</a></li>
+<li><a href="https://github.com/gravitee-lab/cci-pipeline-operator">reveal-hugo Github README</a></li>
+<li><a href="https://github.com/gravitee-lab/cci-pipeline-operator/tree/master/exampleSite">Content for this presentation</a></li>
 </ul>
 </section><section>
 <h2 id="external-resources">External resources</h2>
@@ -733,7 +795,7 @@ Reveal.js markdown uses HTML comments to change slide properties, like backgroun
 </script>
 
 <script type="application/json" id="reveal-hugo-site-params">{"history":true,"templates":{"grey":{"background":"#424242","transition":"convex"}}}</script>
-<script type="application/json" id="reveal-hugo-page-params">{"custom_theme":"reveal-hugo/themes/robot-lung.css","highlight_theme":"color-brewer","margin":0.2,"templates":{"hotpink":{"background":"#FF4081","class":"hotpink"}},"transition":"slide","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"custom_theme":"reveal-hugo/themes/robot-lung.css","highlight_theme":"color-brewer","margin":0.2,"templates":{"hotpink":{"background":"#FF4081","class":"hotpink","color":"#000000"}},"transition":"slide","transition_speed":"fast"}</script>
 
 <script src="/reveal-js/js/reveal.js"></script>
 

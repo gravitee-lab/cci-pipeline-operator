@@ -8,8 +8,8 @@ weight = 42
 
 ## Code and docs
 
-- [reveal-hugo Github README](https://github.com/dzello/reveal-hugo)
-- [Content for this presentation](https://github.com/dzello/reveal-hugo/tree/master/exampleSite)
+- [reveal-hugo Github README](https://github.com/gravitee-lab/cci-pipeline-operator)
+- [Content for this presentation](https://github.com/gravitee-lab/cci-pipeline-operator/tree/master/exampleSite)
 
 ---
 

@@ -17,7 +17,7 @@ You can generalize the concept to add any additional markup to your presentation
 
 ---
 
-[See the code for this presentation](https://github.com/dzello/reveal-hugo/blob/master/exampleSite/content/logo-example/_index.md)
+[See the code for this presentation](https://github.com/gravitee-lab/cci-pipeline-operator/blob/master/exampleSite/content/logo-example/_index.md)
 
 ---
 
