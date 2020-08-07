@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Logo presentation example</title>
+
+<meta name="author" content="Josh Dzielak">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-hugo/themes/robot-lung.css" id="theme"><link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h2 id="logo-example">logo-example</h2>
+<p>This presentation shows how to add a logo to each slide, like the GitHub one you see above.</p>
+<p>You can generalize the concept to add any additional markup to your presentations.</p>
+</section><section>
+<p><a href="https://github.com/gravitee-lab/cci-pipeline-operator/blob/master/exampleSite/content/logo-example/_index.md">See the code for this presentation</a></p>
+</section><section>
+<p>First, create a partial called <code>body.html</code> and put it in this directory:</p>
+<pre><code class="language-text">layouts/partials/{section}/reveal-hugo/body.html
+</code></pre>
+</section><section>
+<p>Substitute <code>{section}</code> for <code>home</code> if you are adding a logo to the presentation at <code>content/_index.md</code>. Otherwise, substitute the name of the Hugo section where your presentation lives.</p>
+</section><section>
+<p>The presentation you&rsquo;re looking at right now is in <code>content/logo-example</code>, so the partial to add the logo lives in:</p>
+<pre><code class="language-text">layouts/partials/logo-example/reveal-hugo/body.html
+</code></pre>
+</section><section>
+<p>💡 Tip: to make the logo appear in every presentation, put it here:</p>
+<pre><code class="language-text">layouts/partials/reveal-hugo/body.html
+</code></pre>
+</section><section>
+<p>💡 Tip: In addition to <code>body.html</code>, you can create partials <code>head.html</code> and <code>end.html</code> in any of those directories.</p>
+</section><section>
+<ul>
+<li>head.html: Add markup just before the closing <code>&lt;/head&gt;</code> tag</li>
+<li>body.html: Add markup just before the closing <code>&lt;/body&gt;</code> tag</li>
+<li>end.html: Add markup just before the closing of the Reveal.js <code>div.slides</code> container</li>
+</ul>
+</section><section>
+<p>Once the partial exists in <code>body.html</code>, we can add our image tag to it:</p>
+<pre><code class="language-html">&lt;img id=&quot;logo&quot; src=&quot;{{ .Param &quot;logo.src&quot; }}&quot; alt=&quot;{{ .Param &quot;logo.alt&quot; }}&quot;&gt;
+</code></pre>
+</section><section>
+<p>In this example, the src and alt attributes are set to values from the content&rsquo;s front matter or site&rsquo;s configuration, which you can see in <code>logo-example/_index.md</code>:</p>
+<pre><code class="language-toml">[logo]
+src = &quot;/images/github-logo.png&quot;
+alt = &quot;GitHub logo with Octocat&quot;
+</code></pre>
+</section><section>
+<p>To position the logo, we can add a style tag to <code>body.html</code>:</p>
+<pre><code class="language-html">&lt;style&gt;
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+  }
+&lt;/style&gt;
+</code></pre>
+<small>
+💡 Depending on the theme you're using, your styles will be different. <br>You may also prefer to put your CSS in an external file or your Reveal.js theme.
+</small>
+</section><section>
+<h1 id="heading">🤗</h1>
+<p>That&rsquo;s it.</p>
+<p>Happy Hugo-ing!</p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"history":true,"templates":{"grey":{"background":"#424242","transition":"convex"}}}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"custom_theme":"reveal-hugo/themes/robot-lung.css","margin":0.2}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    
+    <style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+  }
+</style>
+<img id="logo" src="github-logo.png" alt="GitHub logo with Octocat">
+  </body>
+</html>

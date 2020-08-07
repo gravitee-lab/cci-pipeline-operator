@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Hugo highlighting example</title>
+
+<meta name="author" content="Josh Dzielak">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h2 id="hugo-highlighter-presentation">Hugo Highlighter Presentation</h2>
+<p>This is an example of a presentation using Hugo&rsquo;s compile-time syntax highlighter.</p>
+</section><section>
+<p>Reveal.js uses Javascript for syntax highlighting (via Highlight.js). This might slow the presentation down if many slides contain code.</p>
+</section><section>
+<p>Hugo has a built-in <a href="https://gohugo.io/content-management/syntax-highlighting/">compile-time highlighter</a>, and it&rsquo;s lightning fast too!</p>
+</section><section>
+<p>You can enable it using the <code>highlight</code> shortcode.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#000;font-weight:bold">{{&lt;</span> <span style="color:#000">highlight</span> <span style="color:#204a87;font-weight:bold">go</span> <span style="color:#000;font-weight:bold">&gt;}}</span>
+
+<span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">main</span>
+ 
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+ 
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Hello world!&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000;font-weight:bold">{{&lt;</span> <span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">highlight</span> <span style="color:#000;font-weight:bold">&gt;}}</span></code></pre></div>
+</section><section>
+<p>Several options are supported, check <a href="https://gohugo.io/content-management/syntax-highlighting/">Hugo&rsquo;s documentation</a>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span>{{&lt; highlight <span style="color:#000;font-weight:bold">go</span> <span style="color:#d14">&#34;style=github,linenos=inline,hl_lines=6&#34;</span> &gt;}}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span style="color:#000;font-weight:bold">package</span> main
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span style="color:#000;font-weight:bold">import</span> <span style="color:#d14">&#34;fmt&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+<span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>    fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Hello world!&#34;</span>)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span>{{&lt; <span style="color:#000;font-weight:bold">/</span>highlight &gt;}}</code></pre></div>
+</section><section>
+<p>You can also use Hugo&rsquo;s highlighter in markdown code fences,
+by putting this in <code>config.toml</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#998;font-style:italic"># use Hugo&#39;s hl in markdown (with or without a language tag)</span>
+[markup.highlight]
+codeFences = <span style="color:#000;font-weight:bold">true</span>
+style = <span style="color:#d14">&#34;github&#34;</span></code></pre></div>
+<p>(This can only be enabled globally for all presentations.)</p>
+</section><section>
+<ul>
+<li>Highlight.js is automatically disabled in code blocks highlighted by Hugo.</li>
+<li>The two highlighters can be even mixed.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">main</span>
+ 
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+ 
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Hello world!&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<pre><code class="language-go">package main
+ 
+import &quot;fmt&quot;
+ 
+func main() {
+    fmt.Println(&quot;Hello world!&quot;)
+}
+</code></pre>
+</section><section>
+<p>If you don&rsquo;t need highlight.js at all, you can prevent it from loading.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#998;font-style:italic"># This works both in config.toml and a presentation&#39;s front</span>
+<span style="color:#998;font-style:italic"># matter. Default plugins include highlight.js, so disable them</span>
+<span style="color:#998;font-style:italic"># and load those that we want manually.</span>
+
+[params.reveal_hugo]
+load_default_plugins = <span style="color:#000;font-weight:bold">false</span>
+plugins = [
+  <span style="color:#d14">&#34;reveal-js/plugin/zoom-js/zoom.js&#34;</span>,
+  <span style="color:#d14">&#34;reveal-js/plugin/notes/notes.js&#34;</span>,
+]</code></pre></div>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"history":true,"templates":{"grey":{"background":"#424242","transition":"convex"}}}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"theme":"simple"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    
+    
+  </body>
+</html>
